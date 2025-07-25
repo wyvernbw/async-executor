@@ -120,7 +120,7 @@ impl<'a> Executor<'a> {
     ///
     /// let ex = Executor::new();
     /// ```
-    pub const fn new() -> Executor<'a> {
+    pub const fn new() -> Self {
         Executor {
             state: AtomicPtr::new(std::ptr::null_mut()),
             _marker: PhantomData,
@@ -413,7 +413,7 @@ impl Drop for Executor<'_> {
 }
 
 impl<'a> Default for Executor<'a> {
-    fn default() -> Executor<'a> {
+    fn default() -> Self {
         Executor::new()
     }
 }
@@ -461,7 +461,7 @@ impl<'a> LocalExecutor<'a> {
     ///
     /// let local_ex = LocalExecutor::new();
     /// ```
-    pub const fn new() -> LocalExecutor<'a> {
+    pub const fn new() -> Self {
         LocalExecutor {
             inner: Executor::new(),
             _marker: PhantomData,
@@ -644,7 +644,7 @@ impl<'a> LocalExecutor<'a> {
 }
 
 impl<'a> Default for LocalExecutor<'a> {
-    fn default() -> LocalExecutor<'a> {
+    fn default() -> Self {
         LocalExecutor::new()
     }
 }
@@ -669,7 +669,7 @@ struct State {
 
 impl State {
     /// Creates state for a new executor.
-    const fn new() -> State {
+    const fn new() -> Self {
         State {
             queue: ConcurrentQueue::unbounded(),
             local_queues: RwLock::new(Vec::new()),
